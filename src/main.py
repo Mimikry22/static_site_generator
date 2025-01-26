@@ -1,5 +1,6 @@
-from textnode import TextNode, TextType, text_node_to_html_node, split_nodes_delimiter
+from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, LeafNode, ParentNode
+from inline_markdown import *
 
 def main():
     test_text_node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
@@ -30,8 +31,9 @@ def main():
     #print(node)
     node_del = TextNode("This is text with a `code block` word", TextType.NORMAL)
     new_nodes = split_nodes_delimiter([node_del], "`", TextType.CODE)
-    print(new_nodes)
-
+    #print(new_nodes)
+    #print(extract_markdown_images(""))
+    #print(extract_markdown_links(""))
 
 
 main()
