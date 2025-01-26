@@ -1,9 +1,9 @@
-from textnode import *
+from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, LeafNode, ParentNode
 
 def main():
     test_text_node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
-    #print(test_text_node)
+    #print(test_text_node.text_type)
     attr_tag = {
     "href": "https://www.google.com",
     "target": "_blank",
@@ -25,7 +25,10 @@ def main():
         LeafNode(None, "Normal text"),
     ],
     )
-    print(node.to_html())
-    print(node)
+    print(text_node_to_html_node(test_text_node))
+    #print(node.to_html())
+    #print(node)
+
+
 
 main()
