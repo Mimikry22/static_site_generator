@@ -32,3 +32,9 @@ def extract_markdown_links(text):
     # [("to boot dev", "https://www.boot.dev"), ("to youtube", "https://www.youtube.com/@bootdotdev")]
     matches = re.findall(r"\[([^\[\]]*)\]\(([^\(\)]*)\)",text)
     return matches
+
+def split_nodes_image(old_nodes):
+    pass
+
+def split_nodes_link(old_nodes):
+    pass
