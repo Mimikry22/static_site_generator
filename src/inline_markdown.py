@@ -47,13 +47,49 @@ def extract_markdown_links(text):
 #     ),
 # ]
 def split_nodes_image(old_nodes):
-    pass
+    new_nodes = []
+    sections_list = []
+    for old_node in old_nodes:
+        if old_node.text_type != TextType.NORMAL:
+            new_nodes.append(old_node)
+            continue
+        matches = extract_markdown_images(old_node.text)
+        section_text = old_node.text
+        if len(matches) == 0:
+            new_nodes.append(old_node)
+            continue
+        for match in matches:
+            sections_list = section_text.split(f'![{match[0]}]({match[1]})',1)
+            if len(sections_list) != 2:
+                raise ValueError("Invalid markdown, image section not closed")
+            if sections_list[0] != "":
+                new_nodes.append(TextNode(sections_list[0], TextType.NORMAL))
+            new_nodes.append(TextNode(match[0], TextType.IMAGES, match[1]))
+            section_text = sections_list[1]
+        if section_text != "":
+            new_nodes.append(TextNode(section_text, TextType.NORMAL))
+    return new_nodes
 
 def split_nodes_link(old_nodes):
     new_nodes = []
+    sections_list = []
     for old_node in old_nodes:
+        if old_node.text_type != TextType.NORMAL:
+            new_nodes.append(old_node)
+            continue
         matches = extract_markdown_links(old_node.text)
+        section_text = old_node.text
+        if len(matches) == 0:
+            new_nodes.append(old_node)
+            continue
         for match in matches:
-            sections = old_node.text.split(f"[{match[0]}]({match[1]})",1)
-            print(f"Match 0: {match[0]}, Match 1: {match[1]}")
-            print(sections)
+            sections_list = section_text.split(f'[{match[0]}]({match[1]})',1)
+            if len(sections_list) != 2:
+                raise ValueError("Invalid markdown, link section not closed")
+            if sections_list[0] != "":
+                new_nodes.append(TextNode(sections_list[0], TextType.NORMAL))
+            new_nodes.append(TextNode(match[0], TextType.LINKS, match[1]))
+            section_text = sections_list[1]
+        if section_text != "":
+            new_nodes.append(TextNode(section_text, TextType.NORMAL))
+    return new_nodes
