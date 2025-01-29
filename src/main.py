@@ -34,6 +34,10 @@ def main():
     #print(new_nodes)
     #print(extract_markdown_images(""))
     #print(extract_markdown_links(""))
-
+    node = TextNode(
+        "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
+        TextType.NORMAL,
+    )
+    new_nodes = split_nodes_link([node])
 
 main()
