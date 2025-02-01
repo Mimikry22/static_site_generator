@@ -1,5 +1,5 @@
 import re
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
@@ -95,7 +95,7 @@ def split_nodes_link(old_nodes):
     return new_nodes
 
 def text_to_textnodes(text):
-    new_nodes = [TextNode('This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)', TextType.NORMAL)]
+    new_nodes = [TextNode(text, TextType.NORMAL)]
     # [
     # TextNode("This is ", TextType.TEXT),
     # TextNode("text", TextType.BOLD),
@@ -114,12 +114,3 @@ def text_to_textnodes(text):
     new_nodes = split_nodes_image(new_nodes)
     new_nodes = split_nodes_link(new_nodes)
     return new_nodes
-
-def markdown_to_blocks(markdown):
-    markdown = "# This is a heading\n\nThis is a paragraph of text. It has some **bold** and *italic* words inside of it.\n\n* This is the first list item in a list block\n* This is a list item\n* This is another list item"
-    text_split = markdown.split('\n\n')
-    str_list = []
-    for split in text_split:
-        if (split != ''):
-            str_list.append(split.strip())
-    print(str_list)

@@ -42,5 +42,19 @@ def main():
     #new_nodes = split_nodes_link([node])
     text_to_textnodes("")
     markdown_to_blocks("")
+    test = """# Header
 
+Paragraph
+
+- List item
+- List item2
+
+[link](somewhere)
+
+![image](something)
+
+*italics*
+
+**bold**"""
+    markdown_to_html_node(test)
 main()
