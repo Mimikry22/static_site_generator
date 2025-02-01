@@ -1,6 +1,7 @@
 from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from inline_markdown import *
+from markdown_blocks import *
 
 def main():
     test_text_node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
@@ -40,5 +41,6 @@ def main():
     )
     #new_nodes = split_nodes_link([node])
     text_to_textnodes("")
+    markdown_to_blocks("")
 
 main()

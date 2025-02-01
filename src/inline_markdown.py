@@ -113,4 +113,13 @@ def text_to_textnodes(text):
     new_nodes = split_nodes_delimiter(new_nodes, '*', TextType.ITALIC)
     new_nodes = split_nodes_image(new_nodes)
     new_nodes = split_nodes_link(new_nodes)
-    print(new_nodes)
+    return new_nodes
+
+def markdown_to_blocks(markdown):
+    markdown = "# This is a heading\n\nThis is a paragraph of text. It has some **bold** and *italic* words inside of it.\n\n* This is the first list item in a list block\n* This is a list item\n* This is another list item"
+    text_split = markdown.split('\n\n')
+    str_list = []
+    for split in text_split:
+        if (split != ''):
+            str_list.append(split.strip())
+    print(str_list)
