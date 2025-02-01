@@ -4,6 +4,7 @@ from markdown_blocks import (
     block_to_block_type,
     markdown_to_html_node,
     markdown_to_blocks,
+    extract_title,
     block_type_paragraph,
     block_type_heading,
     block_type_code,
@@ -151,5 +152,29 @@ this is paragraph text
             html,
             "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
         )
+
+    def test_extract_title(self):
+        md = """
+# this is an h1
+
+this is paragraph text
+
+## this is an h2
+"""
+        title = extract_title(md)
+        self.assertEqual(title, "this is an h1")
+
+    def test_extract_no_title(self):
+        md = """
+> This is a
+> blockquote block
+
+this is paragraph text
+
+"""
+        with self.assertRaises(Exception) as cm:
+            extract_title(md)
+            self.assertTrue("No title in markdown" in cm.exception)
+    
 if __name__ == "__main__":
     unittest.main()
