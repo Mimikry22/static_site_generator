@@ -93,3 +93,24 @@ def split_nodes_link(old_nodes):
         if section_text != "":
             new_nodes.append(TextNode(section_text, TextType.NORMAL))
     return new_nodes
+
+def text_to_textnodes(text):
+    new_nodes = [TextNode('This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)', TextType.NORMAL)]
+    # [
+    # TextNode("This is ", TextType.TEXT),
+    # TextNode("text", TextType.BOLD),
+    # TextNode(" with an ", TextType.TEXT),
+    # TextNode("italic", TextType.ITALIC),
+    # TextNode(" word and a ", TextType.TEXT),
+    # TextNode("code block", TextType.CODE),
+    # TextNode(" and an ", TextType.TEXT),
+    # TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+    # TextNode(" and a ", TextType.TEXT),
+    # TextNode("link", TextType.LINK, "https://boot.dev"),
+    # ]
+    new_nodes = split_nodes_delimiter(new_nodes, '`', TextType.CODE)
+    new_nodes = split_nodes_delimiter(new_nodes, '**', TextType.BOLD)
+    new_nodes = split_nodes_delimiter(new_nodes, '*', TextType.ITALIC)
+    new_nodes = split_nodes_image(new_nodes)
+    new_nodes = split_nodes_link(new_nodes)
+    print(new_nodes)

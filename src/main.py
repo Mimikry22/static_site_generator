@@ -38,6 +38,7 @@ def main():
         "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
         TextType.NORMAL,
     )
-    new_nodes = split_nodes_link([node])
+    #new_nodes = split_nodes_link([node])
+    text_to_textnodes("")
 
 main()
